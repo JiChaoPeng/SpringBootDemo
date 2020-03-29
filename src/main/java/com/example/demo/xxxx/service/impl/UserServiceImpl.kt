@@ -3,17 +3,24 @@ package com.example.demo.xxxx.service.impl
 import com.example.demo.xxxx.bean.OrderUserBean
 import com.example.demo.xxxx.constant.ERROR
 import com.example.demo.xxxx.constant.SUCCEED
-import com.example.demo.xxxx.dao.OrderUserRepository
+import com.example.demo.xxxx.dao.UserDao
 import com.example.demo.xxxx.service.UserService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import javax.transaction.Transactional
+import javax.annotation.Resource
 
 @Service("userService")
-interface UserServiceImpl : UserService {
+class UserServiceImpl : UserService {
+
+    @Resource
+    lateinit var userDao: UserDao
+
+    override fun findByAccount(account: String): OrderUserBean {
+        return userDao.findByAccount(account)
+    }
+
     override fun signUp(orderUser: OrderUserBean): Int {
         return try {
-            save(orderUser)
+            userDao.save(orderUser)
             SUCCEED
         } catch (e: Exception) {
             ERROR
@@ -29,8 +36,8 @@ interface UserServiceImpl : UserService {
         }
     }
 
-    override fun findAllBean(): List<OrderUserBean> {
-        return findAll()
+    override fun findAllBean(): List<OrderUserBean>? {
+        return userDao?.findAll()
     }
 
 }
