@@ -1,13 +1,15 @@
 package com.example.demo.xxxx.controller
 
-import com.example.demo.xxxx.bean.OrderUserBean
-import com.example.demo.xxxx.service.UserService
+import com.example.demo.xxxx.bean.ResultBean
+import com.example.demo.xxxx.bean.UserOrder
+import com.example.demo.xxxx.constant.SUCCEED
 import com.example.demo.xxxx.service.impl.UserServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RestController
-import com.example.demo.xxxx.dao.UserDao
+import org.springframework.web.bind.annotation.RequestParam
+import javax.annotation.Resource
 
 
 //返回json格式
@@ -15,23 +17,29 @@ import com.example.demo.xxxx.dao.UserDao
 class UserController {
 
     @Autowired
+    @Resource
     internal var userService: UserServiceImpl? = null
 
-    @RequestMapping("/order/v1/signUp", method = [RequestMethod.POST])
-    fun signUp(account: String, password: String, level: Int? = 0
-               , age: Int? = null, name: String? = null, imageIndex: Int? = 0,
-               imageUrl: String? = null): Int? {
-        return userService?.signUp(OrderUserBean(account, password, level
-                , age, name, imageIndex, imageUrl))
-
-
+    @RequestMapping("/order/v1/signUp",
+            params = ["account", "password", "level", "age", "name", "imageIndex", "imageUrl"],
+            method = [RequestMethod.POST])
+    fun signUp(@RequestParam("account") account: String,
+               @RequestParam("password") password: String,
+               @RequestParam("level") level: Int? = 0,
+               @RequestParam("age") age: Int? = null,
+               @RequestParam("name") name: String? = null,
+               @RequestParam("imageIndex") imageIndex: Int? = 0,
+               @RequestParam("imageUrl") imageUrl: String? = null): ResultBean? {
+        return ResultBean(SUCCEED, userService?.signUp(UserOrder(account, password, level
+                , age, name, imageIndex, imageUrl)).toString())
     }
 
-    @RequestMapping("/order/v1/signIn", method = [RequestMethod.POST])
-    fun signIn(account: String, password: String): OrderUserBean? {
-
-        return userService?.signIn(account, password)
-
+    @RequestMapping("/order/v1/signIn",
+            params = ["account", "password"],
+            method = [RequestMethod.POST])
+    fun signIn(@RequestParam("account") account: String,
+               @RequestParam("password") password: String): ResultBean? {
+        return ResultBean(SUCCEED, userService?.signIn(account, password).toString())
 
     }
 

@@ -1,18 +1,17 @@
 package com.example.demo.xxxx.service
 
-import com.example.demo.xxxx.bean.OrderUserBean
-import org.springframework.data.jpa.repository.JpaRepository
+import com.example.demo.xxxx.bean.UserOrder
 
 
 interface UserService {
 
 
-    fun signUp(orderUser: OrderUserBean): Int
+    fun signUp(user: UserOrder): Int
 
-    fun signIn(account: String, password: String): OrderUserBean?
+    fun signIn(account: String, password: String): UserOrder?
 
-    fun findAllBean(): List<OrderUserBean>?
+    fun findAllBean(): List<UserOrder>?
 
-    fun findByAccount(account: String): OrderUserBean
+    fun findByAccount(account: String): UserOrder
 
 }

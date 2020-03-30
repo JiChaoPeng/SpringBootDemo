@@ -1,6 +1,6 @@
 package com.example.demo.xxxx.service.impl
 
-import com.example.demo.xxxx.bean.OrderUserBean
+import com.example.demo.xxxx.bean.UserOrder
 import com.example.demo.xxxx.constant.ERROR
 import com.example.demo.xxxx.constant.SUCCEED
 import com.example.demo.xxxx.dao.UserDao
@@ -14,20 +14,20 @@ class UserServiceImpl : UserService {
     @Resource
     lateinit var userDao: UserDao
 
-    override fun findByAccount(account: String): OrderUserBean {
+    override fun findByAccount(account: String): UserOrder {
         return userDao.findByAccount(account)
     }
 
-    override fun signUp(orderUser: OrderUserBean): Int {
+    override fun signUp(user: UserOrder): Int {
         return try {
-            userDao.save(orderUser)
+            userDao.save(user)
             SUCCEED
         } catch (e: Exception) {
             ERROR
         }
     }
 
-    override fun signIn(account: String, password: String): OrderUserBean? {
+    override fun signIn(account: String, password: String): UserOrder? {
         val findByAccount = findByAccount(account)
         return if (findByAccount.account == account) {
             findByAccount
@@ -36,8 +36,8 @@ class UserServiceImpl : UserService {
         }
     }
 
-    override fun findAllBean(): List<OrderUserBean>? {
-        return userDao?.findAll()
+    override fun findAllBean(): List<UserOrder>? {
+        return userDao.findAll()
     }
 
 }
