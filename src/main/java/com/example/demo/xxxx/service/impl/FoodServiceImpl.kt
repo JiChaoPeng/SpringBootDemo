@@ -5,8 +5,9 @@ import com.example.demo.xxxx.constant.ERROR
 import com.example.demo.xxxx.constant.SUCCEED
 import com.example.demo.xxxx.dao.FoodDao
 import com.example.demo.xxxx.service.FoodService
+import org.springframework.stereotype.Service
 import javax.annotation.Resource
-
+@Service("foodService")
 class FoodServiceImpl : FoodService {
 
     @Resource
@@ -33,7 +34,7 @@ class FoodServiceImpl : FoodService {
                 listOf.add(it)
             }
         }
-        return foods
+        return listOf
     }
 
 }

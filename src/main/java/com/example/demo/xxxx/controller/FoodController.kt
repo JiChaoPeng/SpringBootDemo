@@ -50,18 +50,18 @@ class FoodController {
 
     }
 
-    @PostMapping(value = ["android/v1/food/Upload"])
+    @RequestMapping(value = ["/android/v1/food/Upload"] )
     @Throws(Exception::class)
-    fun uploadImage(@RequestParam(value = "file") file: MultipartFile, request: HttpServletRequest, response: HttpServletResponse): ResultBean {
+    fun uploadImage(@RequestParam(value = "file",required = false, defaultValue = "") file: MultipartFile): ResultBean {
         if (file.isEmpty) {
             println("文件为空空")
         }
         var fileName = file.originalFilename  // 文件名
-        val suffixName = fileName!!.substring(fileName.lastIndexOf("."))  // 后缀名
+        val suffixName = fileName?.substring(fileName.lastIndexOf("."))  // 后缀名
         if (suffixName != ".jpg" && suffixName != ".png") {
             return ResultBean(ERROR, "", " 请选择图片 ！！！")
         }
-        val filePath = "/root/pic/food/" // 上传后的路径
+        val filePath = "/pic/food/" // 上传后的路径
         fileName = UUID.randomUUID().toString() + suffixName // 新文件名
         val dest = File(filePath + fileName)
         if (!dest.parentFile.exists()) {
@@ -74,7 +74,7 @@ class FoodController {
         }
 
         val filename = "/temp-rainy/$fileName"
-        return ResultBean(SUCCEED, filename)
+        return ResultBean(SUCCEED, filename,filePath)
     }
 
 
