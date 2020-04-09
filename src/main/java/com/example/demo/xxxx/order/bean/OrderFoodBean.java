@@ -1,12 +1,9 @@
-package com.example.demo.xxxx.bean;
+package com.example.demo.xxxx.order.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class FoodBean {
+public class OrderFoodBean {
     private String name;
     private String content;
     private int price;
@@ -15,13 +12,13 @@ public class FoodBean {
     private int room_id;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int food_id;
+    private int id;
 
-    public FoodBean() {
+    public OrderFoodBean() {
 
     }
 
-    public FoodBean(String name, String content, int price, String imageUrl, String address, int roomId) {
+    public OrderFoodBean(String name, String content, int price, String imageUrl, String address, int roomId) {
         this.name = name;
         this.content = content;
         this.price = price;
@@ -78,11 +75,11 @@ public class FoodBean {
         this.address = address;
     }
 
-    public int getFood_id() {
-        return food_id;
+    public int getId() {
+        return id;
     }
 
-    public void setFood_id(int food_id) {
-        this.food_id = food_id;
+    public void setId(int id) {
+        this.id = id;
     }
 }

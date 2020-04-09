@@ -2,6 +2,7 @@ package com.example.demo.xxxx.controller
 
 import com.example.demo.xxxx.bean.ResultBean
 import com.example.demo.xxxx.bean.UserOrder
+import com.example.demo.xxxx.constant.ERROR
 import com.example.demo.xxxx.constant.SUCCEED
 import com.example.demo.xxxx.service.impl.UserServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
@@ -29,18 +30,15 @@ class UserController {
                @RequestParam("age") age: Int? = null,
                @RequestParam("name") name: String? = null,
                @RequestParam("imageIndex") imageIndex: Int? = 0,
-               @RequestParam("imageUrl") imageUrl: String? = null): ResultBean? {
-        return ResultBean(SUCCEED, userService?.signUp(UserOrder(account, password, level
-                , age, name, imageIndex, imageUrl)).toString())
+               @RequestParam("imageUrl") imageUrl: String? = null): ResultBean<UserOrder>? {
+        return userService?.signUp(UserOrder(account, password, level, age, name, imageIndex, imageUrl))
     }
 
     @RequestMapping("/order/v1/signIn",
             params = ["account", "password"],
             method = [RequestMethod.POST])
     fun signIn(@RequestParam("account") account: String,
-               @RequestParam("password") password: String): ResultBean? {
-        return ResultBean(SUCCEED, userService?.signIn(account, password).toString())
-
+               @RequestParam("password") password: String): ResultBean<UserOrder>? {
+        return ResultBean(SUCCEED, null, userService?.signIn(account, password))
     }
-
 }

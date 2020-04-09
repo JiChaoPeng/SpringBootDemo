@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface FoodDao : JpaRepository<FoodBean, String> {
-    fun findByName(name: String): FoodBean
+    fun findByName(name: String): List<FoodBean>?
 }
