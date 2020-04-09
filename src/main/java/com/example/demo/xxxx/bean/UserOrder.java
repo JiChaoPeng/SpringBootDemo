@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_order")
 public class UserOrder {
     private String account;
     private String password;
