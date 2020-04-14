@@ -18,7 +18,7 @@ import javax.annotation.Resource
 class RoomController {
     @Autowired
     @Resource
-    internal var roomService: RoomServiceImpl? = null
+    internal val roomService: RoomServiceImpl? = null
 
     @RequestMapping("/android/v1/addRoom",
             params = ["name", "ownerId", "level", "age", "imageUrl", "address", "appIndex"],

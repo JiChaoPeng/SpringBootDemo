@@ -3,7 +3,6 @@ package com.example.demo.xxxx.order.controller
 import com.example.demo.xxxx.bean.ResultBean
 import com.example.demo.xxxx.bean.ResultModel
 import com.example.demo.xxxx.order.bean.OrderFoodBean
-import com.example.demo.xxxx.order.bean.OrderFoodListBean
 import com.example.demo.xxxx.order.service.impl.OrderFoodServiceImpl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.RequestMapping
@@ -20,6 +19,7 @@ import java.util.UUID
 
 import com.example.demo.xxxx.constant.ERROR
 import com.example.demo.xxxx.constant.SUCCEED
+import com.example.demo.xxxx.order.bean.OrderFoodListBean
 
 //返回json格式
 @RestController

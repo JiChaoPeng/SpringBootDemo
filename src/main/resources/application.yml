@@ -1,4 +1,9 @@
+
+server:
+  port: 8090
+
 spring:
+
   profiles:
     active: a
   datasource:
@@ -11,3 +16,7 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+
+
+
